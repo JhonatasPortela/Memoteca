@@ -22,6 +22,24 @@ const ui = {
     } catch {
       alert("Erro ao renderizar pensamentos");
     }
+
+    if (listaPensamentos.children.length === 0) {
+      const muralVazio = document.createElement("div");
+      muralVazio.classList.add("mural-vazio");
+
+      const mensagem = document.createElement("p");
+      mensagem.textContent = "Nada por aqui ainda, que tal compartilhar alguma ideia?";
+      mensagem.classList.add("mensagem-vazia");
+      muralVazio.appendChild(mensagem);
+
+      const imagemListaVazia = document.createElement("img");
+      imagemListaVazia.src = "assets/imagens/lista-vazia.png";
+      imagemListaVazia.alt = "Lista vazia";
+      imagemListaVazia.classList.add("imagem-lista-vazia");
+      muralVazio.appendChild(imagemListaVazia);
+
+      listaPensamentos.appendChild(muralVazio);
+    }
   },
 
   adicionarPensamentoNaLista(pensamento) {
