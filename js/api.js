@@ -7,6 +7,7 @@ const api = {
       return await response.data;
     } catch {
       alert("Erro ao buscar pensamentos");
+      throw error;
     }
   },
 
@@ -15,7 +16,8 @@ const api = {
       const response = await axios.post(`${URL_BASE}/pensamentos`, pensamento);
       return await response.data;
     } catch {
-      alert("Erro ao salvar pensamentos");
+      alert("Erro ao salvar pensamento");
+      throw error;
     }
   },
 
@@ -25,6 +27,7 @@ const api = {
       return await response.data;
     } catch {
       alert("Erro ao buscar pensamento");
+      throw error;
     }
   },
 
@@ -33,7 +36,8 @@ const api = {
       const response = await axios.put(`${URL_BASE}/pensamentos/${pensamento.id}`, pensamento);
       return await response.data;
     } catch {
-      alert("Erro ao editar pensamentos");
+      alert("Erro ao editar pensamento");
+      throw error;
     }
   },
 
@@ -41,7 +45,8 @@ const api = {
     try {
       const response = await axios.delete(`${URL_BASE}/pensamentos/${id}`);
     } catch {
-      alert("Erro ao excluir pensamentos");
+      alert("Erro ao excluir um pensamento");
+      throw error;
     }
   },
 };

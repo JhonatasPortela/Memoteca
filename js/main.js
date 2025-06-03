@@ -3,11 +3,12 @@ import api from "./api.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   ui.renderizarPensamentos();
-  const btnCancelar = document.getElementById("botao-cancelar");
+
   const formularioPensamento = document.getElementById("pensamento-form");
+  const botaoCancelar = document.getElementById("botao-cancelar");
 
   formularioPensamento.addEventListener("submit", manipularSubmissaoFormulario);
-  btnCancelar.addEventListener("click", manipularCancelamento);
+  botaoCancelar.addEventListener("click", manipularCancelamento);
 });
 
 async function manipularSubmissaoFormulario(event) {
@@ -23,7 +24,7 @@ async function manipularSubmissaoFormulario(event) {
       await api.salvarPensamento({ conteudo, autoria });
     }
     ui.renderizarPensamentos();
-  } catch (error) {
+  } catch {
     alert("Erro ao salvar pensamento");
   }
 }
