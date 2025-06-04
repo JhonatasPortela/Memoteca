@@ -49,6 +49,24 @@ const api = {
       throw error;
     }
   },
+
+  async buscarPensamentosPorTermo(termo) {
+    try {
+      const pensamentos = await this.buscarPensamentos();
+      const termoEmMinusculo = termo.toLowerCase();
+
+      const pensamentosFiltrados = pensamentos.filter((pensamento) => {
+        return (
+          pensamento.conteudo.toLowerCase().includes(termoEmMinusculo) ||
+          pensamento.autoria.toLowerCase().includes(termoEmMinusculo)
+        );
+      });
+      return pensamentosFiltrados;
+    } catch {
+      alert("Erro ao filtrar pensamentos");
+      throw error;
+    }
+  },
 };
 
 export default api;
