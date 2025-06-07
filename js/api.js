@@ -1,7 +1,12 @@
 const URL_BASE = "http://localhost:3000";
 
+const converterStringParaData = (dataString) => {
+  const [ano, mes, dia] = dataString.split("-");
+  return new Date(Date.UTC(ano, mes, dia));
+};
+
 const api = {
-  async buscarPensamentos() {
+  async converterStringParaData() {
     try {
       const response = await axios.get(`${URL_BASE}/pensamentos`);
       return await response.data;
@@ -13,7 +18,11 @@ const api = {
 
   async salvarPensamento(pensamento) {
     try {
-      const response = await axios.post(`${URL_BASE}/pensamentos`, pensamento);
+      const data = converterStringParaData(pensamento.data);
+      const response = await axios.post(`${URL_BASE}/pensamentos`, {
+        ...pensamento,
+        data,
+      });
       return await response.data;
     } catch {
       alert("Erro ao salvar pensamento");
@@ -52,7 +61,7 @@ const api = {
 
   async buscarPensamentosPorTermo(termo) {
     try {
-      const pensamentos = await this.buscarPensamentos();
+      const pensamentos = await this.converterStringParaData();
       const termoEmMinusculo = termo.toLowerCase();
 
       const pensamentosFiltrados = pensamentos.filter((pensamento) => {
@@ -64,6 +73,16 @@ const api = {
       return pensamentosFiltrados;
     } catch {
       alert("Erro ao filtrar pensamentos");
+      throw error;
+    }
+  },
+
+  async atualizarFavorito(id, favorito) {
+    try {
+      const response = await axios.patch(`${URL_BASE}/pensamentos/${id}`, { favorito });
+      return await response.data;
+    } catch {
+      alert("Erro ao atualizar favorito");
       throw error;
     }
   },
