@@ -67,7 +67,8 @@ const ui = {
 
     const dataFormatada = pensamento.data.toLocaleDateString("pt-BR", options);
     const pensamentoData = document.createElement("div");
-    pensamentoData.textContent = dataFormatada;
+    const dataComRegex = dataFormatada.replace(/^(\w)/, (match) => match.toUpperCase());
+    pensamentoData.textContent = dataComRegex;
     pensamentoData.classList.add("pensamento-data");
 
     const botaoEditar = document.createElement("button");
